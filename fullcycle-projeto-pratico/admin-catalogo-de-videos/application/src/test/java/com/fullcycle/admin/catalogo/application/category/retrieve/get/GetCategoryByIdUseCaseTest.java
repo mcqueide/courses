@@ -15,6 +15,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class GetCategoryByIdUseCaseTest {
 
@@ -40,7 +43,7 @@ public class GetCategoryByIdUseCaseTest {
 
         final var expectedId = aCategory.getId();
 
-        Mockito.when(categoryGateway.findById(Mockito.eq(expectedId)))
+        when(categoryGateway.findById(eq(expectedId)))
                 .thenReturn(Optional.of(aCategory.clone()));
 
         final var actualCategory = useCase.execute(expectedId.getValue());
@@ -59,7 +62,7 @@ public class GetCategoryByIdUseCaseTest {
         final var expectedErrorMessage = "Category with ID 123 was not found";
         final var expectedId = CategoryID.from("123");
 
-        Mockito.when(categoryGateway.findById(Mockito.eq(expectedId)))
+        when(categoryGateway.findById(eq(expectedId)))
                 .thenReturn(Optional.empty());
 
         final var actualException = Assertions.assertThrows(
@@ -75,7 +78,7 @@ public class GetCategoryByIdUseCaseTest {
         final var expectedErrorMessage = "Gateway error";
         final var expectedId = CategoryID.from("123");
 
-        Mockito.when(categoryGateway.findById(Mockito.eq(expectedId)))
+        when(categoryGateway.findById(eq(expectedId)))
                 .thenThrow(new IllegalStateException(expectedErrorMessage));
 
         final var actualException = Assertions.assertThrows(

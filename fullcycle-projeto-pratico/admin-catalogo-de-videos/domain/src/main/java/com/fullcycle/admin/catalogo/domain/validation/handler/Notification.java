@@ -11,7 +11,7 @@ public class Notification implements ValidationHandler {
 
     private final List<Error> errors;
 
-    public Notification(final List<Error> errors) {
+    private Notification(final List<Error> errors) {
         this.errors = errors;
     }
 

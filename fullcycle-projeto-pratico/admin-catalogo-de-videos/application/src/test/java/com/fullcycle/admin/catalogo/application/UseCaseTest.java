@@ -11,5 +11,4 @@ public class UseCaseTest {
     public void testCreateUseCase() {
 
     }
-
 }

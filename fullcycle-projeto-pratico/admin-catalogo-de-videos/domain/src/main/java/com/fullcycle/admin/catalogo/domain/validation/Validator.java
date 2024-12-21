@@ -10,7 +10,7 @@ public abstract class Validator {
 
     public abstract void validate();
 
-    public ValidationHandler validationHandler() {
+    protected ValidationHandler validationHandler() {
         return this.handler;
     }
 }

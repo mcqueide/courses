@@ -6,7 +6,7 @@ public class NoStacktraceException extends RuntimeException {
         this(message, null);
     }
 
-    public NoStacktraceException(final String message, Throwable cause) {
+    public NoStacktraceException(final String message, final Throwable cause) {
         super(message, cause, true, false);
     }
 }

@@ -15,6 +15,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class ListCategoriesUseCaseTest {
 
@@ -51,7 +54,7 @@ public class ListCategoriesUseCaseTest {
         final var expectedItemsCount = 2;
         final var expectedResult = expectedPagination.map(CategoryListOutput::from);
 
-        Mockito.when(categoryGateway.findAll(Mockito.eq(aQuery)))
+        when(categoryGateway.findAll(eq(aQuery)))
                 .thenReturn(expectedPagination);
 
         final var actualResult = useCase.execute(aQuery);
@@ -82,7 +85,7 @@ public class ListCategoriesUseCaseTest {
         final var expectedItemsCount = 0;
         final var expectedResult = expectedPagination.map(CategoryListOutput::from);
 
-        Mockito.when(categoryGateway.findAll(Mockito.eq(aQuery)))
+        when(categoryGateway.findAll(eq(aQuery)))
                 .thenReturn(expectedPagination);
 
         final var actualResult = useCase.execute(aQuery);
@@ -106,7 +109,7 @@ public class ListCategoriesUseCaseTest {
         final var aQuery =
                 new CategorySearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
-        Mockito.when(categoryGateway.findAll(Mockito.eq(aQuery)))
+        when(categoryGateway.findAll(eq(aQuery)))
                 .thenThrow(new IllegalStateException(expectedErrorMessage));
 
         final var actualException =
