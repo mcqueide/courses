@@ -38,7 +38,15 @@ public class Genre extends AggregateRoot<GenreId> {
         selfValidate();
     }
 
-    public Genre with(final GenreId anId,
+    public static Genre newGenre(final String aName, final boolean isActive) {
+        final var anId = GenreId.unique();
+        final var now = InstantUtils.now();
+        final var deletedAt = isActive ? null : now;
+
+        return new Genre(anId, aName, isActive, new ArrayList<>(), now, now, deletedAt);
+    }
+
+    public static Genre with(final GenreId anId,
                     final String aName,
                     final boolean isActive,
                     final List<CategoryID> categories,
@@ -48,7 +56,7 @@ public class Genre extends AggregateRoot<GenreId> {
         return new Genre(anId, aName, isActive, new ArrayList<>(), aCreatedAt, aUpdatedAt, aDeletedAt);
     }
 
-    public Genre with(final Genre aGenre) {
+    public static Genre with(final Genre aGenre) {
         return new Genre(aGenre.id,
                 aGenre.name,
                 aGenre.active,
@@ -58,12 +66,9 @@ public class Genre extends AggregateRoot<GenreId> {
                 aGenre.deletedAt);
     }
 
-    public static Genre newGenre(final String aName, final boolean isActive) {
-        final var anId = GenreId.unique();
-        final var now = InstantUtils.now();
-        final var deletedAt = isActive ? null : now;
-
-        return new Genre(anId, aName, isActive, new ArrayList<>(), now, now, deletedAt);
+    @Override
+    public void validate(final ValidationHandler handler) {
+        new GenreValidator(this, handler).validate();
     }
 
     public Genre update(final String aName, final boolean isActive, final List<CategoryID> categories) {
@@ -77,11 +82,6 @@ public class Genre extends AggregateRoot<GenreId> {
         this.updatedAt = InstantUtils.now();
         selfValidate();
         return this;
-    }
-
-    @Override
-    public void validate(final ValidationHandler handler) {
-        new GenreValidator(this, handler).validate();
     }
 
     public Genre deactivate() {
@@ -141,6 +141,16 @@ public class Genre extends AggregateRoot<GenreId> {
         this.categories.add(aCategoryId);
         this.updatedAt = InstantUtils.now();
 
+        return this;
+    }
+
+    public Genre addCategories(List<CategoryID> categories) {
+        if (categories == null || categories.isEmpty()) {
+            return this;
+        }
+
+        this.categories.addAll(categories);
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
