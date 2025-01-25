@@ -3,7 +3,7 @@ package com.fullcycle.admin.catalogo.application.genre.delete;
 import com.fullcycle.admin.catalogo.application.UseCaseTest;
 import com.fullcycle.admin.catalogo.domain.genre.Genre;
 import com.fullcycle.admin.catalogo.domain.genre.GenreGateway;
-import com.fullcycle.admin.catalogo.domain.genre.GenreId;
+import com.fullcycle.admin.catalogo.domain.genre.GenreID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -48,7 +48,7 @@ public class DeleteGenreUseCaseTest extends UseCaseTest {
     @Test
     public void givenAnInvalidGenreId_whenCallsDeleteGenre_shouldBeOk() {
         // given
-        final var expectedId = GenreId.from("123");
+        final var expectedId = GenreID.from("123");
 
         doNothing()
                 .when(genreGateway).deleteById(any());

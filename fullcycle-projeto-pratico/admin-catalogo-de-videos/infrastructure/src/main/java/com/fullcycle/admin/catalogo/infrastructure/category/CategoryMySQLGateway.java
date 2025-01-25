@@ -3,15 +3,15 @@ package com.fullcycle.admin.catalogo.infrastructure.category;
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
-import com.fullcycle.admin.catalogo.domain.pagination.SearchQuery;
 import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
+import com.fullcycle.admin.catalogo.domain.pagination.SearchQuery;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 import static com.fullcycle.admin.catalogo.infrastructure.utils.SpecificationUtils.like;
 
-@Service
+@Component
 public class CategoryMySQLGateway implements CategoryGateway {
 
     private final CategoryRepository repository;
@@ -64,11 +64,7 @@ public class CategoryMySQLGateway implements CategoryGateway {
         // Busca dinamica pelo criterio terms (name ou description)
         final var specifications = Optional.ofNullable(aQuery.terms())
                 .filter(str -> !str.isBlank())
-                .map(str -> {
-                    final Specification<CategoryJpaEntity> nameLike = like("name", str);
-                    final Specification<CategoryJpaEntity> descriptionLike = like("description", str);
-                    return nameLike.or(descriptionLike);
-                })
+                .map(this::assembleSpecification)
                 .orElse(null);
 
         final var pageResult =
@@ -84,10 +80,17 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
     @Override
     public List<CategoryID> existsByIds(final Iterable<CategoryID> ids) {
+        // TODO: Implementar quando chegar na camada de infraestrutura de Genre.
         return Collections.emptyList();
     }
 
     private Category save(final Category aCategory) {
         return this.repository.save(CategoryJpaEntity.from(aCategory)).toAggregate();
+    }
+
+    private Specification<CategoryJpaEntity> assembleSpecification(final String str) {
+        final Specification<CategoryJpaEntity> nameLike = like("name", str);
+        final Specification<CategoryJpaEntity> descriptionLike = like("description", str);
+        return nameLike.or(descriptionLike);
     }
 }

@@ -9,9 +9,9 @@ public interface GenreGateway {
 
     Genre create(Genre aGenre);
 
-    void deleteById(GenreId anId);
+    void deleteById(GenreID anId);
 
-    Optional<Genre> findById(GenreId anId);
+    Optional<Genre> findById(GenreID anId);
 
     Genre update(Genre aGenre);
 

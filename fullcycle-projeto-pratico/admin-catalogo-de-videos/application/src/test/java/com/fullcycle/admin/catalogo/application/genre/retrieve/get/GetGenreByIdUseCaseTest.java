@@ -5,7 +5,7 @@ import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.exceptions.NotFoundException;
 import com.fullcycle.admin.catalogo.domain.genre.Genre;
 import com.fullcycle.admin.catalogo.domain.genre.GenreGateway;
-import com.fullcycle.admin.catalogo.domain.genre.GenreId;
+import com.fullcycle.admin.catalogo.domain.genre.GenreID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -70,7 +70,7 @@ public class GetGenreByIdUseCaseTest extends UseCaseTest {
         // given
         final var expectedErrorMessage = "Genre with ID 123 was not found";
 
-        final var expectedId = GenreId.from("123");
+        final var expectedId = GenreID.from("123");
 
         when(genreGateway.findById(eq(expectedId)))
                 .thenReturn(Optional.empty());

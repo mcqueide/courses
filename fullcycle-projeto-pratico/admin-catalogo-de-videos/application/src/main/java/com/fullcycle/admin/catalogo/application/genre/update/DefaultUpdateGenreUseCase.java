@@ -1,7 +1,6 @@
 package com.fullcycle.admin.catalogo.application.genre.update;
 
 import com.fullcycle.admin.catalogo.domain.Identifier;
-import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.exceptions.DomainException;
@@ -9,7 +8,7 @@ import com.fullcycle.admin.catalogo.domain.exceptions.NotFoundException;
 import com.fullcycle.admin.catalogo.domain.exceptions.NotificationException;
 import com.fullcycle.admin.catalogo.domain.genre.Genre;
 import com.fullcycle.admin.catalogo.domain.genre.GenreGateway;
-import com.fullcycle.admin.catalogo.domain.genre.GenreId;
+import com.fullcycle.admin.catalogo.domain.genre.GenreID;
 import com.fullcycle.admin.catalogo.domain.validation.Error;
 import com.fullcycle.admin.catalogo.domain.validation.ValidationHandler;
 import com.fullcycle.admin.catalogo.domain.validation.handler.Notification;
@@ -34,7 +33,7 @@ public class DefaultUpdateGenreUseCase extends UpdateGenreUseCase{
 
     @Override
     public UpdateGenreOutput execute(final UpdateGenreCommand aCommand) {
-        final var anId = GenreId.from(aCommand.id());
+        final var anId = GenreID.from(aCommand.id());
         final var aName = aCommand.name();
         final var isActive = aCommand.isActive();
         final var categories = toCategoryId(aCommand.categories());

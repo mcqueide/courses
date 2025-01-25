@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Genre extends AggregateRoot<GenreId> {
+public class Genre extends AggregateRoot<GenreID> {
 
     private String name;
     private boolean active;
@@ -21,7 +21,7 @@ public class Genre extends AggregateRoot<GenreId> {
     private Instant updatedAt;
     private Instant deletedAt;
 
-    protected Genre(final GenreId anId,
+    protected Genre(final GenreID anId,
                     final String aName,
                     final boolean isActive,
                     final List<CategoryID> categories,
@@ -39,14 +39,14 @@ public class Genre extends AggregateRoot<GenreId> {
     }
 
     public static Genre newGenre(final String aName, final boolean isActive) {
-        final var anId = GenreId.unique();
+        final var anId = GenreID.unique();
         final var now = InstantUtils.now();
         final var deletedAt = isActive ? null : now;
 
         return new Genre(anId, aName, isActive, new ArrayList<>(), now, now, deletedAt);
     }
 
-    public static Genre with(final GenreId anId,
+    public static Genre with(final GenreID anId,
                     final String aName,
                     final boolean isActive,
                     final List<CategoryID> categories,

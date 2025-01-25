@@ -1,30 +1,29 @@
 package com.fullcycle.admin.catalogo.domain.genre;
 
 import com.fullcycle.admin.catalogo.domain.Identifier;
-import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class GenreId extends Identifier {
+public class GenreID extends Identifier {
 
     private final String value;
 
-    private GenreId(final String value) {
+    private GenreID(final String value) {
         Objects.requireNonNull(value);
         this.value = value;
     }
 
-    public static GenreId unique() {
-        return GenreId.from(UUID.randomUUID());
+    public static GenreID unique() {
+        return GenreID.from(UUID.randomUUID());
     }
 
-    public static GenreId from(final String anId) {
-        return new GenreId(anId);
+    public static GenreID from(final String anId) {
+        return new GenreID(anId);
     }
 
-    public static GenreId from(final UUID anId) {
-        return new GenreId(anId.toString().toLowerCase());
+    public static GenreID from(final UUID anId) {
+        return new GenreID(anId.toString().toLowerCase());
     }
 
     @Override
@@ -36,7 +35,7 @@ public class GenreId extends Identifier {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final GenreId that = (GenreId) o;
+        final GenreID that = (GenreID) o;
         return getValue().equals(that.getValue());
     }
 

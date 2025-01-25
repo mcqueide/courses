@@ -36,21 +36,14 @@ public class CategoryE2ETest {
     private CategoryRepository categoryRepository;
 
     @Container
-    private static final MySQLContainer MYSQL_CONTAINER = new MySQLContainer("mysql:8.0")
+    private static final MySQLContainer MYSQL_CONTAINER = new MySQLContainer("mysql:latest")
             .withPassword("123456")
             .withUsername("root")
             .withDatabaseName("adm_videos");
 
     @DynamicPropertySource
     public static void setDatasourceProperties(final DynamicPropertyRegistry registry) {
-        final var mappedPort = MYSQL_CONTAINER.getMappedPort(3306);
-        System.out.println("Container is running on port " + mappedPort);
         registry.add("mysql.port", () -> MYSQL_CONTAINER.getMappedPort(3306));
-    }
-
-    @Test
-    public void testWorks() {
-        Assertions.assertTrue(MYSQL_CONTAINER.isRunning());
     }
 
     @Test

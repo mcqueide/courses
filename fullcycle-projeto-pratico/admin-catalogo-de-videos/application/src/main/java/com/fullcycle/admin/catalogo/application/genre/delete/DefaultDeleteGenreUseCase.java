@@ -1,7 +1,7 @@
 package com.fullcycle.admin.catalogo.application.genre.delete;
 
 import com.fullcycle.admin.catalogo.domain.genre.GenreGateway;
-import com.fullcycle.admin.catalogo.domain.genre.GenreId;
+import com.fullcycle.admin.catalogo.domain.genre.GenreID;
 
 import java.util.Objects;
 
@@ -15,6 +15,6 @@ public class DefaultDeleteGenreUseCase extends DeleteGenreUseCase{
 
     @Override
     public void execute(final String anId) {
-        this.genreGateway.deleteById(GenreId.from(anId));
+        this.genreGateway.deleteById(GenreID.from(anId));
     }
 }
