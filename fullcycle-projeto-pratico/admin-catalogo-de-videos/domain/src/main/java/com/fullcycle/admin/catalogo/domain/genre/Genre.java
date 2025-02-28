@@ -53,7 +53,7 @@ public class Genre extends AggregateRoot<GenreID> {
                     final Instant aCreatedAt,
                     final Instant aUpdatedAt,
                     final Instant aDeletedAt) {
-        return new Genre(anId, aName, isActive, new ArrayList<>(), aCreatedAt, aUpdatedAt, aDeletedAt);
+        return new Genre(anId, aName, isActive, categories, aCreatedAt, aUpdatedAt, aDeletedAt);
     }
 
     public static Genre with(final Genre aGenre) {
@@ -144,7 +144,7 @@ public class Genre extends AggregateRoot<GenreID> {
         return this;
     }
 
-    public Genre addCategories(List<CategoryID> categories) {
+    public Genre addCategories(final List<CategoryID> categories) {
         if (categories == null || categories.isEmpty()) {
             return this;
         }
@@ -154,7 +154,7 @@ public class Genre extends AggregateRoot<GenreID> {
         return this;
     }
 
-    public Genre removeCategory(CategoryID aCategoryId) {
+    public Genre removeCategory(final CategoryID aCategoryId) {
         if (aCategoryId == null) {
             return this;
         }

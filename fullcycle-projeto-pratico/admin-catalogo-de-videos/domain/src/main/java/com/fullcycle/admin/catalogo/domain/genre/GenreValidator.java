@@ -24,12 +24,12 @@ public class GenreValidator extends Validator {
     private void checkNameConstraints() {
         final var name = this.genre.getName();
         if (name == null) {
-            this.validationHandler().append(new com.fullcycle.admin.catalogo.domain.validation.Error("'name' should not be null"));
+            this.validationHandler().append(new Error("'name' should not be null"));
             return;
         }
 
         if (name.isBlank()) {
-            this.validationHandler().append(new com.fullcycle.admin.catalogo.domain.validation.Error("'name' should not be empty"));
+            this.validationHandler().append(new Error("'name' should not be empty"));
             return;
         }
 

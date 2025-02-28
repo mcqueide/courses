@@ -1,7 +1,5 @@
 package com.fullcycle.admin.catalogo.application.genre.update;
 
-import com.fullcycle.admin.catalogo.domain.category.CategoryID;
-
 import java.util.List;
 
 public record UpdateGenreCommand(

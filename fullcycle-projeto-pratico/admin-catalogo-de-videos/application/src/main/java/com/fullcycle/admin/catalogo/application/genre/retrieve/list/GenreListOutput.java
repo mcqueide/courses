@@ -1,6 +1,5 @@
 package com.fullcycle.admin.catalogo.application.genre.retrieve.list;
 
-import com.fullcycle.admin.catalogo.application.genre.retrieve.get.GenreOutput;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.genre.Genre;
 

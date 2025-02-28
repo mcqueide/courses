@@ -14,7 +14,7 @@ public class DefaultGetGenreByIdUseCase extends GetGenreByIdUseCase{
 
     private final GenreGateway genreGateway;
 
-    public DefaultGetGenreByIdUseCase(GenreGateway genreGateway) {
+    public DefaultGetGenreByIdUseCase(final GenreGateway genreGateway) {
         this.genreGateway = Objects.requireNonNull(genreGateway);
     }
 

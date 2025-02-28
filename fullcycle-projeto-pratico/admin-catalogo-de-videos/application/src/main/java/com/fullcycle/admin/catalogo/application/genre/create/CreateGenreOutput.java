@@ -1,6 +1,5 @@
 package com.fullcycle.admin.catalogo.application.genre.create;
 
-import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.genre.Genre;
 
 public record CreateGenreOutput(

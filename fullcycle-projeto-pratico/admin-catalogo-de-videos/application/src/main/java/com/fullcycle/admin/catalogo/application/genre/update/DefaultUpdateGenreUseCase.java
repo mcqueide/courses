@@ -60,10 +60,10 @@ public class DefaultUpdateGenreUseCase extends UpdateGenreUseCase{
             return notification;
         }
 
-        final var retrieviedIds = categoryGateway.existsByIds(ids);
-        if (ids.size() != retrieviedIds.size()) {
+        final var retrievedIds = categoryGateway.existsByIds(ids);
+        if (ids.size() != retrievedIds.size()) {
             final var missingIds = new ArrayList<>(ids);
-            missingIds.removeAll(retrieviedIds);
+            missingIds.removeAll(retrievedIds);
 
             final var missingIdsMessage = missingIds.stream()
                     .map(CategoryID::getValue)
